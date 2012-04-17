@@ -29,8 +29,7 @@
   `(,(bit-extract hex  0 8)
     ,(bit-extract hex  9 16)
     ,(bit-extract hex  16 24)
-    ,(bit-extract hex  24 32)
-    ))
+    ,(bit-extract hex  24 32)))
 
 ;;zenburn palette
 (define *palette* '( #xdcdcccaa
@@ -59,8 +58,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scene support(levels, if you prefer)
 (use-modules (oop goops))
-(define-class <scene> ()
-  )
+(define-class <scene> ())
 
 (define-class <accordion-scene> (<scene>))
 
@@ -85,8 +83,7 @@
   `(( ,(number->string a) ,(palette-lookup c))
     ( ,(number->string b) ,(palette-lookup c))
     ( ,(number->string(* a b)) ,(palette-lookup c))
-    ( "*" ,(palette-lookup c))
-    ))
+    ( "*" ,(palette-lookup c))))
 
 ;;temporary storage for generated math triangles
 (define *vec* )
@@ -168,15 +165,11 @@
                          (triangle (addtriangle i j (caar *vec*) ( palette-lookup 2) 1)))
                     (array-set! *grid* (append (car *vec*) (list  triangle)) i j)
                     (enq! *triangles* triangle )
-                    (set! *vec* (cdr *vec*)))
-                  
-                  )
+                    (set! *vec* (cdr *vec*))))
                 region))
          (map (lambda (coord)
                 (apply extract-formula-region-coords coord))
-              (centers scene))))
-  
-  )
+              (centers scene)))))
 
 
 ;;iterates the defined centers of the grid
@@ -186,14 +179,11 @@
     (map (lambda (region)
            (set! color (1+ color))
            (map (lambda (region-coord)
-                  (enq! *triangles* (addtriangle (car region-coord) (cadr region-coord) "" (palette-lookup (1+ (modulo color 2) )) 0))
-
-                  )
+                  (enq! *triangles* (addtriangle (car region-coord) (cadr region-coord) "" (palette-lookup (1+ (modulo color 2) )) 0)))
                 region))
          (map (lambda (coord)
                 (apply extract-formula-region-coords coord))
-              (centers scene))))
-  )
+              (centers scene)))))
 
 
 (define-method (centers (scene <accordion-scene>))
@@ -225,9 +215,7 @@
 
     (4 3)
     (6 4)
-    (8 3)
-    
-    ))
+    (8 3)))
 
 
 (define-method  (make-grid (scene <box2d-scene>))
@@ -268,8 +256,7 @@
 
 
 (define (check-formula f)
-  (apply equal? (map (lambda (x) (cadr x)) f))
-  )
+  (apply equal? (map (lambda (x) (cadr x)) f)))
 
 (define-method (check-all-grid-pos (scene <scene>))
   (delq #f (map (lambda (formula)  (if  ( check-formula (cdr formula)) (car formula) #f))
@@ -280,13 +267,10 @@
        (check-all-grid-pos scene)))
 
 (define (formula-region-completed x y)
-  (let ((triangles (extract-formula-region x y))
-        )
+  (let ((triangles (extract-formula-region x y)))
     (map (lambda (tri) (deltriangle (list-ref tri 2)))
-         triangles)
-    )
+         triangles))
   ;;(deltriangle (car  center) (cadr center))
-
   )
 
 
@@ -328,9 +312,7 @@
                                         (make <box2d-scene>))
                                       ( (string=? "hexagon" (getscenename))
                                         (make <hexagon-numbers-scene>))))
-         (make-grid *current-scene*)
-         )
-  ))
+         (make-grid *current-scene*))))
 
 (addscenename "accordion-numbers")
 (addscenename "accordion-colors")
@@ -342,8 +324,7 @@
 ;;called when a triangle finishes swap animation
 (define (animation-callback msg)
   (display "guile animation callback ")  (display msg)
-  (check-and-delete *current-scene*)
-  )
+  (check-and-delete *current-scene*))
 
 
 
