@@ -1,0 +1,43 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.68])
+AC_INIT(matangle, 0.1, joakim@verona.se)
+AC_CONFIG_SRCDIR([matangle.cc])
+AC_CONFIG_HEADERS([config.h])
+dnl AM_INIT_AUTOMAKE
+
+dnl Support for --program-prefix, --program-suffix and
+dnl --program-transform-name options
+AC_ARG_PROGRAM
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+
+# Checks for libraries.
+# FIXME: Replace `main' with a function in `-lm':
+AC_CHECK_LIB([m], [main])
+
+dnl Checks for libraries.
+PKG_PROG_PKG_CONFIG()
+PKG_CHECK_MODULES([GTK], [gtk+-2.0])
+PKG_CHECK_MODULES([GTHREAD], [gthread-2.0])
+PKG_CHECK_MODULES([GLIB], [glib-2.0])
+PKG_CHECK_MODULES([GUILE], [guile-2.0])
+PKG_CHECK_MODULES([PANGOMM], [pangomm-1.4])
+PKG_CHECK_MODULES([CLUTTERMM], [cluttermm-1.0])
+PKG_CHECK_MODULES([CLUTTER_COGL], [clutter-cogl-1.0])
+PKG_CHECK_MODULES([CLUTTER_BOX2D], [clutter-box2d-0.12])
+PKG_CHECK_MODULES([MX], [mx-1.0])
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+
+# Checks for library functions.
+AC_CHECK_FUNCS([sqrt])
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT

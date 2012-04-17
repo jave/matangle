@@ -1,0 +1,7 @@
+;; Object triangle
+;; EDE project file.
+(ede-proj-project "matangle"
+  :name "matangle"
+  :file "Project.ede"
+  :targets 'nil
+  )

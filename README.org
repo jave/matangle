@@ -1,0 +1,13 @@
+* Matangle
+
+Matangle is a cooperative mathematical family game.
+
+The goal is to puzzle together simple mathematical formulas, such as
+2*3=6, in triangular shapes.
+
+The game is in very early stages. It is prototyped with Guile
+Scheme, the Clutter toolkit, and some C/C++ glue. 
+
+** Contact
+Joakim verona
+joakim@verona.se
