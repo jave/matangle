@@ -8,6 +8,15 @@ The goal is to puzzle together simple mathematical formulas, such as
 The game is in very early stages. It is prototyped with Guile
 Scheme, the Clutter toolkit, and some C/C++ glue. 
 
+** building
+git clone https://jave@github.com/jave/matangle.git
+cd matangle
+autoreconf
+./configure
+make
+./matangle
+
+
 ** Contact
 Joakim verona
 joakim@verona.se
