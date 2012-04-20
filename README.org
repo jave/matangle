@@ -9,13 +9,14 @@ The game is in very early stages. It is prototyped with Guile
 Scheme, the Clutter toolkit, and some C/C++ glue. 
 
 ** building
+#begin_src
 git clone https://jave@github.com/jave/matangle.git
 cd matangle
 autoreconf
 ./configure
 make
 ./matangle
-
+#end_src
 
 ** Contact
 Joakim verona
