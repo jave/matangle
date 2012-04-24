@@ -25,7 +25,7 @@
 #include "triangle_actor.h"
 #include <cluttermm.h>
 
-#include <mx/mx.h>
+//#include <mx/mx.h>
 
 #include <pangomm/init.h>
 #include <pangomm/context.h>
@@ -39,6 +39,7 @@
 #include <clutter-box2d.h>
 #endif
 #include <libguile.h>
+
 
 double angle=0;
 
@@ -347,14 +348,15 @@ SCM_DEFINE (getscenename, "getscenename", 0, 0, 0,
               (),
             "selected scene name")
 {
-  return scm_from_latin1_string(mx_combo_box_get_active_text (MX_COMBO_BOX(scenecombo)));
+  return NULL;
+  //return scm_from_latin1_string();//mx_combo_box_get_active_text (MX_COMBO_BOX(scenecombo))
 }
 
 SCM_DEFINE (addscenename, "addscenename", 1, 0, 0,
               (SCM scene),
             "add scene name")
 {
-  mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), scm_to_utf8_stringn(scene, NULL));
+  //mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), scm_to_utf8_stringn(scene, NULL));
   return SCM_UNSPECIFIED;
 }
 
@@ -366,16 +368,16 @@ void snarf_init(){
 }
 #endif
 
-void button_callback (MxButton *button,
-                      gpointer  user_data) {
-  printf("button %s\n", user_data);
-  SCM func_symbol;
-  SCM func;
-  func_symbol = scm_c_lookup("button-callback");
-  func = scm_variable_ref(func_symbol);
-  scm_call_1 (func, scm_from_latin1_string ((gchar*)user_data));
+// void button_callback (MxButton *button,
+//                       gpointer  user_data) {
+//   printf("button %s\n", user_data);
+//   SCM func_symbol;
+//   SCM func;
+//   func_symbol = scm_c_lookup("button-callback");
+//   func = scm_variable_ref(func_symbol);
+//   scm_call_1 (func, scm_from_latin1_string ((gchar*)user_data));
   
-}
+// }
 
 //int inner_main(int argc, char** argv)
 static void inner_main(void *closure, int argc, char** argv)
@@ -406,25 +408,25 @@ static void inner_main(void *closure, int argc, char** argv)
   Glib::RefPtr<Clutter::Texture> bg = Clutter::Texture::create_from_file("bg.jpg");
   stage->add_actor(bg);
 
-  //add buttons
-  ClutterActor* exitbutton = mx_button_new_with_label("exit"); //mx_menu_new();
-  clutter_container_add_actor(CLUTTER_CONTAINER (stage->gobj()),exitbutton);
+  // //add buttons
+  // ClutterActor* exitbutton = mx_button_new_with_label("exit"); //mx_menu_new();
+  // clutter_container_add_actor(CLUTTER_CONTAINER (stage->gobj()),exitbutton);
 
-  ClutterActor* newbutton = mx_button_new_with_label("new"); 
-  clutter_container_add_actor(CLUTTER_CONTAINER (stage->gobj()),newbutton);
-  clutter_actor_set_position(CLUTTER_ACTOR (newbutton), 0,30);
+  // ClutterActor* newbutton = mx_button_new_with_label("new"); 
+  // clutter_container_add_actor(CLUTTER_CONTAINER (stage->gobj()),newbutton);
+  // clutter_actor_set_position(CLUTTER_ACTOR (newbutton), 0,30);
 
-  scenecombo = mx_combo_box_new (); 
-  clutter_container_add_actor(CLUTTER_CONTAINER (stage->gobj()), scenecombo);
-  // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "accordion-colors");
-  // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "accordion-numbers");
-  // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "hexagon");
-  // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "box2d");
-  clutter_actor_set_position(CLUTTER_ACTOR (scenecombo), 0,60);
+  // scenecombo = mx_combo_box_new (); 
+  // clutter_container_add_actor(CLUTTER_CONTAINER (stage->gobj()), scenecombo);
+  // // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "accordion-colors");
+  // // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "accordion-numbers");
+  // // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "hexagon");
+  // // mx_combo_box_append_text (MX_COMBO_BOX(scenecombo), "box2d");
+  // clutter_actor_set_position(CLUTTER_ACTOR (scenecombo), 0,60);
 
   
-  g_signal_connect (G_OBJECT (    exitbutton), "clicked",    G_CALLBACK (button_callback), (gchar*)"exit");
-  g_signal_connect (G_OBJECT (    newbutton), "clicked",    G_CALLBACK (button_callback), (gchar*)"new");
+  // g_signal_connect (G_OBJECT (    exitbutton), "clicked",    G_CALLBACK (button_callback), (gchar*)"exit");
+  // g_signal_connect (G_OBJECT (    newbutton), "clicked",    G_CALLBACK (button_callback), (gchar*)"new");
       
 
 

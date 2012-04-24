@@ -314,10 +314,10 @@
                                         (make <hexagon-numbers-scene>))))
          (make-grid *current-scene*))))
 
-(addscenename "accordion-numbers")
-(addscenename "accordion-colors")
-(addscenename "box2d")
-(addscenename "hexagon")
+;; (addscenename "accordion-numbers")
+;; (addscenename "accordion-colors")
+;; (addscenename "box2d")
+;; (addscenename "hexagon")
 
 
 
@@ -364,7 +364,8 @@
 
 (display "hello! ")
 ;;if we can get a value from a clutter combo here, C initialisation has gone well
-(display (getscenename))
+;;(display (getscenename))
+
 
 
 ;;(make-grid        (make <accordion-numbers-scene>))

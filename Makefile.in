@@ -36,7 +36,9 @@ clean:
 	rm matangle.x matangle
 
 matangle.x: matangle.cc
-	guile-snarf  -o matangle.x matangle.cc  
+	guile-snarf   @GUILE_CFLAGS@    -o - matangle.cc >matangle.x
+#	guile-snarf @GUILE_CFLAGS@  -o matangle.x matangle.cc  
+#  the above saner snarf call stopped working all of a sudden when going from F16 to F17
 
-matangle: triangle_actor.cc triangle_actor.h matangle.cc matangle.x 
+matangle:  triangle_actor.cc triangle_actor.h matangle.cc matangle.x 
 	g++ -std=gnu++0x -g ${CFLAGS} ${LDFLAGS} triangle_actor.cc matangle.cc -o matangle
